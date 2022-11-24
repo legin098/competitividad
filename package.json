@@ -4,6 +4,9 @@
   "version": "1.0.1",
   "private": true,
   "dependencies": {
+    "@types/googlemaps": "^3.0.0",
+    "@types/markerclustererplus": "^2.1.29",
+    "@types/react": "18.0.25",
     "@fortawesome/fontawesome-free": "5.14.0",
     "@glidejs/glide": "3.5.2",
     "@testing-library/jest-dom": "5.16.5",

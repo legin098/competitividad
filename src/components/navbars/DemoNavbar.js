@@ -110,6 +110,14 @@ function DemoNavbar(props) {
                             navbar
                         >
                             <UncontrolledDropdown nav>
+                                <Link to="/empresa/id">
+
+                                    <span className="nav-link-inner--text" style={{color:"#0A81C4"}}>
+                                        Empresa
+                                    </span>
+                                </Link>
+                            </UncontrolledDropdown>
+                            <UncontrolledDropdown nav>
                                 <Link to="/nosotros">
 
                                     <span className="nav-link-inner--text" style={{color:"#0A81C4"}}>
