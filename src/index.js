@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Route, Redirect,HashRouter } from "react-router-dom";
+import { Route, Redirect, HashRouter, Routes } from "react-router-dom";
 
 import "assets/css/nucleo-svg.css";
 import "assets/css/nucleo-icons.css";
@@ -28,118 +28,49 @@ import ProductPage from "views/examples/ProductPage.js";
 import ProfilePage from "views/examples/ProfilePage.js";
 import RegisterPage from "views/examples/RegisterPage.js";
 import ResetPage from "views/examples/ResetPage.js";
-import NosotrosScreen from 'views/NosotrosScreen'
-import ConvocatoriasScreen from 'views/ConvocatoriasScreen'
-import HacemosScreen from 'views/HacemosScreen'
+import NosotrosScreen from "views/NosotrosScreen";
+import ConvocatoriasScreen from "views/ConvocatoriasScreen";
+import HacemosScreen from "views/HacemosScreen";
 import EmpresaDetailScreen from "views/EmpresaDetailScreen";
+import { Provider } from "react-redux";
+import store from "store";
+import DemoNavbar from "components/navbars/DemoNavbar";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <HashRouter>
+  <Provider store={store}>
+    <HashRouter>
+      <>
+        <DemoNavbar type="white" />
+        <Routes>
+          <Route path="/index" element={<Index />} />
+          <Route path="/nosotros" element={<NosotrosScreen />} />
+          <Route path="/login" element={<ConvocatoriasScreen />} />
+          <Route path="/hacemos" element={<HacemosScreen />} />
+          <Route path="/empresa/:id" element={<EmpresaDetailScreen />} />
 
-      <Route path="/index" exact render={(props) => <Index {...props} />} />
-      <Route path="/nosotros" exact render={(props)=> <NosotrosScreen {...props}/>} />
-      <Route path="/convocatorias" exact render={(props)=> <ConvocatoriasScreen {...props}/>} />
-      <Route path="/hacemos" exact render={(props)=> <HacemosScreen {...props}/>} />
-      <Route path="/empresa/:id" exact render={(props)=> <EmpresaDetailScreen {...props}/>} />
-
-      <Route
-        path="/sections"
-        exact
-        render={(props) => <Sections {...props} />}
-      />
-      <Route
-        path="/presentation"
-        exact
-        render={(props) => <Presentation {...props} />}
-      />
-      <Route
-        path="/about-us"
-        exact
-        render={(props) => <AboutUs {...props} />}
-      />
-      <Route
-        path="/account-settings"
-        exact
-        render={(props) => <AccountSettings {...props} />}
-      />
-      <Route
-        path="/blog-post"
-        exact
-        render={(props) => <BlogPost {...props} />}
-      />
-      <Route
-        path="/blog-posts"
-        exact
-        render={(props) => <BlogPosts {...props} />}
-      />
-      <Route
-        path="/chat-page"
-        exact
-        render={(props) => <ChatPage {...props} />}
-      />
-      <Route
-        path="/checkout-page"
-        exact
-        render={(props) => <CheckoutPage {...props} />}
-      />
-      <Route
-        path="/contact-us"
-        exact
-        render={(props) => <ContactUs {...props} />}
-      />
-      <Route
-        path="/ecommerce"
-        exact
-        render={(props) => <Ecommerce {...props} />}
-      />
-      <Route path="/error" exact render={(props) => <Error {...props} />} />
-      <Route
-        path="/error-500"
-        exact
-        render={(props) => <Error500 {...props} />}
-      />
-      <Route
-        path="/invoice-page"
-        exact
-        render={(props) => <InvoicePage {...props} />}
-      />
-      <Route
-        path="/landing-page"
-        exact
-        render={(props) => <LandingPage {...props} />}
-      />
-      <Route
-        path="/login-page"
-        exact
-        render={(props) => <LoginPage {...props} />}
-      />
-      <Route
-        path="/pricing-page"
-        exact
-        render={(props) => <PricingPage {...props} />}
-      />
-      <Route
-        path="/product-page"
-        exact
-        render={(props) => <ProductPage {...props} />}
-      />
-      <Route
-        path="/profile-page"
-        exact
-        render={(props) => <ProfilePage {...props} />}
-      />
-      <Route
-        path="/register-page"
-        exact
-        render={(props) => <RegisterPage {...props} />}
-      />
-      <Route
-        path="/reset-page"
-        exact
-        render={(props) => <ResetPage {...props} />}
-      />
-      <Redirect to="/index" />
-
-  </HashRouter>
+          <Route path="/sections" element={<Sections />} />
+          <Route path="/presentation" element={<Presentation />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/account-settings" element={<AccountSettings />} />
+          <Route path="/blog-post" element={<BlogPost />} />
+          <Route path="/blog-posts" element={<BlogPosts />} />
+          <Route path="/chat-page" element={<ChatPage />} />
+          <Route path="/checkout-page" element={<CheckoutPage />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/ecommerce" element={<Ecommerce />} />
+          <Route path="/error" element={<Error />} />
+          <Route path="/error-500" element={<Error500 />} />
+          <Route path="/invoice-page" element={<InvoicePage />} />
+          <Route path="/landing-page" element={<LandingPage />} />
+          <Route path="/login-page" element={<LoginPage />} />
+          <Route path="/pricing-page" element={<PricingPage />} />
+          <Route path="/product-page" element={<ProductPage />} />
+          <Route path="/profile-page" element={<ProfilePage />} />
+          <Route path="/register-page" element={<RegisterPage />} />
+          <Route path="/reset-page" element={<ResetPage />} />
+        </Routes>
+      </>
+    </HashRouter>
+  </Provider>
 );

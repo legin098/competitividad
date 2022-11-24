@@ -135,11 +135,11 @@ function DemoNavbar(props) {
                                 </Link>
                             </UncontrolledDropdown>
                             <UncontrolledDropdown nav>
-                                <Link to="/convocatorias">
+                                <Link to="/login">
 
 
                                     <span className="nav-link-inner--text" style={{color:"#0A81C4"}}>
-                                        Convocatorias
+                                        Login
                                     </span>
 
                                 </Link>

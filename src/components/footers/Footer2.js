@@ -10,51 +10,15 @@ function Footer2() {
   return (
     <>
       <footer className="footer footer-simple">
-        <Container>
-          <nav>
-            <ul>
-              <li>
-                <NavLink
-                  href="https://www.creative-tim.com?ref=adspr-footer2"
-                  target="_blank"
-                >
-                  Creative Tim
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  href="https://www.creative-tim.com/presentation?ref=adspr-footer2"
-                  target="_blank"
-                >
-                  About Us
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  href="https://creative-tim.com/blog?ref=adspr-footer2"
-                  target="_blank"
-                >
-                  Blog
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  href="https://www.creative-tim.com/license?ref=adspr-footer2"
-                  target="_blank"
-                >
-                  License
-                </NavLink>
-              </li>
-            </ul>
-          </nav>
-          <div className="copyright text-right">
-            © {new Date().getFullYear()}, Proudly Coded by{" "}
+        <Container className="text-center">
+          <div className="copyright">
+            © {new Date().getFullYear()}, Orgullosamente codificado por{" "}
             <a
               className="copyright-link"
               href="https://www.creative-tim.com?ref=adspr-footer2"
               target="_blank"
             >
-              Creative Tim
+              JDevRB & LgsusDev
             </a>
             .
           </div>
