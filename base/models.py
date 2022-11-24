@@ -9,6 +9,8 @@ class Empresa(models.Model):
     lon = models.CharField(max_length=255)
     razon_social = models.CharField(max_length=255)
     nit = models.CharField(max_length=25)
+    logo = models.ImageField(null=True, blank=True,
+                              default='/placeholder.png')
 
     def __str__(self):
         return self.nombre

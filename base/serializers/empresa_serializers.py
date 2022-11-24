@@ -8,3 +8,12 @@ class OfertaSerializer(serializers.ModelSerializer):
     class Meta:
         model= Oferta
         fields = '__all__'
+
+class SocialMediaUrlSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= SocialMediaUrl
+        fields = '__all__'
+class EmpresaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Empresa
+        fields = '__all__'
