@@ -31,6 +31,7 @@ import ResetPage from "views/examples/ResetPage.js";
 import NosotrosScreen from 'views/NosotrosScreen'
 import ConvocatoriasScreen from 'views/ConvocatoriasScreen'
 import HacemosScreen from 'views/HacemosScreen'
+import EmpresaDetailScreen from "views/EmpresaDetailScreen";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
@@ -40,6 +41,7 @@ root.render(
       <Route path="/nosotros" exact render={(props)=> <NosotrosScreen {...props}/>} />
       <Route path="/convocatorias" exact render={(props)=> <ConvocatoriasScreen {...props}/>} />
       <Route path="/hacemos" exact render={(props)=> <HacemosScreen {...props}/>} />
+      <Route path="/empresa/:id" exact render={(props)=> <EmpresaDetailScreen {...props}/>} />
 
       <Route
         path="/sections"
