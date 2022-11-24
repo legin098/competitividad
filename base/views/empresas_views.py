@@ -1,6 +1,7 @@
-from base.serializers.empresa_serializers import OfertaSerializer
+from base.serializers.empresa_serializers import OfertaSerializer, SocialMediaUrlSerializer, EmpresaSerializer
 from base.models import Oferta, Review, Empresa, SocialMediaUrl
 from rest_framework.views import APIView
+from rest_framework import generics
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework import status
@@ -16,7 +17,7 @@ class OfertaView(APIView):
     parser_classes = (MultiPartParser, FormParser)
 
     def get(self, request, *args, **kwargs):
-        query = request.query_params.get('keyword')
+        query = request.query_params.filter('keyword')
         if query == None:
             query = ''
         
@@ -50,6 +51,32 @@ class OfertaView(APIView):
         else:
             print('error', ofertas_serializer.errors)
             return Response(ofertas_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class GetEmpresa(generics.ListAPIView):
+    serializer_class=EmpresaSerializer
+    def get (self,request,pk):
+        try:
+            query = request.query_params.get('keyword')
+            if query == None:
+                query = ''
+            empresa= Empresa.objects.get(id=pk)
+            urls = SocialMediaUrl.objects.filter(empresa=pk)
+            serializer = self.serializer_class(empresa)
+            urls_serializer = SocialMediaUrlSerializer(urls,many=True)
+            return Response({'success':True,'Empresa' : serializer.data, 'SocialMediaUrls':urls_serializer.data}, status=status.HTTP_200_OK)
+        except:
+            return Response({'success':False,'detail': 'no existe empresa'}, status=status.HTTP_400_BAD_REQUEST)
+
+class GetEmpresas(generics.ListAPIView):
+    serializer_class=EmpresaSerializer
+    def get (self,request):
+        query = request.query_params.get('keyword')
+        if query == None:
+            query = ''
+        empresa= Empresa.objects.filter(nombre__icontains=query)
+        serializer = self.serializer_class(empresa, many=True)
+        return Response({'success':True,'Empresas': serializer.data}, status=status.HTTP_200_OK)
+        
 
 
 @api_view(['GET'])
@@ -164,3 +191,4 @@ def createOfertaReview(request, pk):
         oferta.save()
 
         return Response('Review Added')
+

@@ -39,7 +39,7 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='index.html'), name= 'index'),
-    path('api/ofertas/', include('base.urls.empresas_urls')),
+    path('api/empresas/', include('base.urls.empresas_urls')),
     path('api/users/', include('base.urls.user_urls')),
     
 
