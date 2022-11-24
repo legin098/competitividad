@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import (Empresa,Oferta,Categoria,SocialMediaUrl,Review)
 
 class OfertaAdmin(admin.ModelAdmin):
-    fields =['nombre','imagen','description','precio','descuento','end_date','Categoria']
+    fields =['nombre','imagen','description','precio','descuento','end_date','categoria']
     def save_model(self, request, obj, form, change):
         empresa = Empresa.objects.get(usuario=request.user.id)
         obj.empresa = empresa

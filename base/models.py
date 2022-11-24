@@ -35,7 +35,7 @@ class Oferta(models.Model):
     descuento = models.IntegerField(max_length=2)
     createdAt = models.DateTimeField(auto_now_add=True)
     end_date = models.DateField()
-    Categoria = models.ManyToManyField('Categoria', blank=True)
+    categoria = models.ManyToManyField('Categoria', blank=True)
     _id = models.AutoField(primary_key=True, editable=False)
 
 
