@@ -139,11 +139,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'competitividad',
-        'USER': 'postgres',
-        'PASSWORD': 'enero201998',
-        'HOST': 'localhost',
-        'PORT': '5433',
+        'NAME': os.environ.get('Competitividad_DB_NAME'),
+        'USER': os.environ.get('Competitividad_DB_USER'),
+        'PASSWORD': os.environ.get('Competitividad_DB_PASSWORD'),
+        'HOST': os.environ.get('Competitividad_DB_HOST'),
+        'PORT': os.environ.get('Competitividad_DB_PORT'),
     }
 }
 
