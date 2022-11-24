@@ -1,0 +1,16 @@
+generar un modelo de arquitectura bassado en roles
+hacer servicios apirest para poder consultqr sobre los cupos disponibles y la distancia respectiva de los colegios
+
+
+clientside rendering para optimizar la velicidad
+react/django/rest
+
+blogpost de ofertas((rautilizar))
+tres tipos de usuario  : secretaria (decide que negocios pueden entrar al sistema) emprendedor:(puede subir ofertas a la plataforma), usuario normal:(puede ver la infromacion dada por los emprendedores) superadmin: acceso a base de datos
+usar SPA
+bases de datos relacionales
+hosting en heroku o railway
+hashrouter para dominio virtual y router normal para dominio real (decidir si se sube backend o front end en un monorepo o en repositorios por separado)
+hacer servicios apirest para ser consumidos por cuaquier servicio(app,web inicialmente)
+autenticacion tipo bearer Token
+CSRF
