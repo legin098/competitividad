@@ -103,7 +103,7 @@ function Index() {
 
     return (
         <>
-            <DemoNavbar type="white" />
+            
             <Content />
             <Blogs4 />
             <section className="pt-5" style={{ backgroundColor: "#CEE6F3" }}>

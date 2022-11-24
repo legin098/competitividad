@@ -1,4 +1,6 @@
-import React from "react";
+import { userLoginAction } from "actions/userAction";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 // reactstrap components
 import {
@@ -19,6 +21,17 @@ import {
 function LoginCard1() {
   const [emailFocus, setEmailFocus] = React.useState("");
   const [passwordFocus, setPasswordFocus] = React.useState("");
+  const [email, setEmail] = useState("")
+  const [pwd, setPwd] = useState("")
+  const dispatch = useDispatch()
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    dispatch(userLoginAction(email, pwd))
+
+    
+  }
   return (
     <>
       <Card className="bg-secondary shadow border-0">
@@ -61,7 +74,7 @@ function LoginCard1() {
           <div className="text-center text-muted mb-4">
             <small>Or login with credentials</small>
           </div>
-          <Form role="form">
+          <Form role="form" onSubmit={ handleSubmit }>
             <FormGroup className={"mb-3 " + emailFocus}>
               <InputGroup className="input-group-alternative">
                 <InputGroupAddon addonType="prepend">
@@ -72,8 +85,7 @@ function LoginCard1() {
                 <Input
                   placeholder="Email"
                   type="email"
-                  onFocus={() => setEmailFocus("focused")}
-                  onBlur={() => setEmailFocus("")}
+                  onChange = { e => setEmail(e.target.value)}
                 ></Input>
               </InputGroup>
             </FormGroup>
@@ -87,8 +99,7 @@ function LoginCard1() {
                 <Input
                   placeholder="Password"
                   type="password"
-                  onFocus={() => setPasswordFocus("focused")}
-                  onBlur={() => setPasswordFocus("")}
+                  onChange = { e => setPwd(e.target.value)}
                 ></Input>
               </InputGroup>
             </FormGroup>
@@ -106,7 +117,7 @@ function LoginCard1() {
               </label>
             </div>
             <div className="text-center">
-              <Button className="my-4" color="primary" type="button">
+              <Button className="my-4" color="primary" type="submit">
                 Login
               </Button>
             </div>
