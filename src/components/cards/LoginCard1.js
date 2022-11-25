@@ -2,6 +2,7 @@ import { userLoginAction } from "actions/userAction";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Logo from "../../static/img/logo-vertical.png"
 
 // reactstrap components
 import {
@@ -37,6 +38,9 @@ function LoginCard1() {
   return (
     <>
       <Card className="bg-secondary shadow border-0">
+        <CardHeader className="d-flex justify-content-center align-items-center">
+          <img src={Logo} alt="" />
+        </CardHeader>
         <CardBody className="px-lg-5 py-lg-5">
           <div className="text-center text-muted mb-4">
             <small>Inicie sesión con credenciales</small>
