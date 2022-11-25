@@ -1,14 +1,50 @@
 import Map from "components/competitividad/Map";
 import credentials from "components/competitividad/credentials";
 import { Container, Row, Col } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Loader from "components/Loader";
 import Message from "components/Message";
+import { useEffect, useState } from "react";
+import clienteAxios from "config/clienteAxios";
+import Paginate from "components/Paginate";
+import Oferta from "components/Oferta";
 
 const EmpresaDetailScreen = () => {
+  const dispatch = useDispatch()
   const { empresaDetail, loading, error } = useSelector(
     (state) => state.empresas
   );
+  const [ofertas, setOfertas] = useState([])
+
+  const [social, setSocial] = useState([]);
+
+  const getMedia = async () => {
+    try {
+      const { data: dataSocial } = await clienteAxios.get(
+        `empresas/social-urls/${empresaDetail.id}`
+      );
+      setSocial(dataSocial.Reviews);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getOferta = async () => {
+    try {
+      const { data : dataOfertas } = await clienteAxios.get(`empresas/ofertas/empresa/${empresaDetail.id}/`)
+      console.log("dataOfertas", dataOfertas)
+      setOfertas(dataOfertas)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getMedia();
+    getOferta()
+  }, []);
+
+
 
   return (
     <div style={{ paddingTop: "7rem" }}>
@@ -20,7 +56,7 @@ const EmpresaDetailScreen = () => {
         <div>
           <Container>
             <Row>
-              <Col md={4}>
+              <Col md={6}>
                 <Container className="p-0">
                   <Map
                     googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&key=${credentials.mapKey}`}
@@ -30,11 +66,46 @@ const EmpresaDetailScreen = () => {
                     lat={Number(empresaDetail.lat)}
                     lon={Number(empresaDetail.lon)}
                   />
-                  <h3 className="mt-3" style={{ color: "#0A81C4" }}>{empresaDetail.nombre}</h3>
                 </Container>
               </Col>
-              <Col md={4}>
+              <Col md={6}>
+                <Container>
+                  <h4 style={{ color: "#0A81C4" }}>{empresaDetail.nombre}</h4>
+                  <p>
+                    Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry. Lorem Ipsum has been the industry's
+                    standard dummy text ever since the 1500s, when an unknown
+                    printer took a galley of type and scrambled it to make a
+                    type specimen book. It has survived not only five centuries,
+                    but also the leap into electronic typesetting, remaining
+                    essentially unchanged. It was popularised in the 1960s with
+                    the release of Letraset sheets containing Lorem Ipsum
+                    passages, and more recently with desktop publishing software
+                    like Aldus PageMaker including versions of Lorem Ipsum.
+                  </p>
+                  <Row>
+                    {social.map((red) => (
+                      <Col lg="4">
+                        <a key={red.id} href={red.url}>
+                          {red.nombre}
+                        </a>
+                      </Col>
+                    ))}
+                  </Row>
+                </Container>
               </Col>
+            </Row>
+            <Row>
+            <Container>
+          <Row>
+            {ofertas.ofertas?.map((oferta) => (
+              <Col key={oferta._id} sm={12} md={6} lg={4}>
+                <Oferta oferta={oferta} />
+              </Col>
+            ))}
+          </Row>
+          {/* <Paginate page={page} pages={pages}/> */}
+        </Container>
             </Row>
           </Container>
         </div>
