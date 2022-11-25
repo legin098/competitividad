@@ -128,7 +128,7 @@ function OfertaDetailScreen() {
                 )}
 
                 <ListGroup variant="flush">
-                  {reviews.Reviews.map((review) => (
+                  {reviews.Reviews?.map((review) => (
                     <ListGroup.Item key={review._id}>
                       <strong>{review.name}</strong>
                       <p>{review.createdAt.substring(0, 10)}</p>

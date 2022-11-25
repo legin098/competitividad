@@ -22,8 +22,10 @@ function OfertasScreen() {
   console.log("asoidfjasoidj:", ofertas)
   return (
     <div style={{ paddingTop: "7rem" }}>
-      <SearchBox />
-      <h1>Latest Products</h1>
+      <Container>
+            <SearchBox />
+            <h1>Ofertas</h1>
+        </Container>
       {error ? (
         <Message variant="danger">{error}</Message>
       ) : (
