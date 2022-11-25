@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Route, HashRouter, Routes } from "react-router-dom";
+import { Route, HashRouter, Routes, Navigate } from "react-router-dom";
 import "./styles.css"
 import "assets/css/nucleo-svg.css";
 import "assets/css/nucleo-icons.css";
@@ -32,6 +32,7 @@ root.render(
           <Route path="/hacemos" element={<HacemosScreen />} />
           <Route path="/empresa/:id" element={<EmpresaDetailScreen />} />
           <Route path="/oferta/:id" element={<OfertaDetailScreen />} />
+          <Route index element={<Navigate to="/index" />} />
         </Routes>
       </>
     </HashRouter>

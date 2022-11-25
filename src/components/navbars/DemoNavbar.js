@@ -7,6 +7,7 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 // JavaScript plugin that hides or shows a component based on your scroll
 import Headroom from "headroom.js";
+import Logo from "../../static/img/logo-horizontal.png"
 // reactstrap components
 import {
   Collapse,
@@ -69,7 +70,7 @@ function DemoNavbar(props) {
             <img
               alt="..."
               style={{ height: "60px" }}
-              src={require("assets/img/brand/LogoMakikunaTransparente-1.png")}
+              src={Logo}
             ></img>
           </NavbarBrand>
           <button
