@@ -19,6 +19,7 @@ import {
   Row,
   Image,
 } from "react-bootstrap";
+import { reviewsOfertaAction } from "actions/reviewAction";
 
 function OfertaDetailScreen() {
   const [comment, setComment] = useState("");
@@ -31,12 +32,19 @@ function OfertaDetailScreen() {
     (state) => state.ofertas
   );
   const ofertaReviewCreate = useSelector((state) => state.review);
+  const { reviews } = useSelector(state => state.ofertaReviews)
 
   const {
     loading: loadingOfertaReview,
     error: errorOfertaReview,
     success: successOfertaReview,
   } = ofertaReviewCreate;
+
+  useEffect(() => {
+    console.log("effect", ofertaDetail)
+    dispatch(reviewsOfertaAction(ofertaDetail._id))
+  }, [ofertaDetail])
+
   useEffect(() => {
     if (successOfertaReview) {
       setRating(0)
@@ -44,7 +52,7 @@ function OfertaDetailScreen() {
       dispatch({ type: OFERTA_CREATE_REVIEW_RESET });
     }
   }, [dispatch, params, successOfertaReview]);
-  console.log(ofertaDetail);
+  //console.log(ofertaDetail);
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
@@ -56,7 +64,7 @@ function OfertaDetailScreen() {
   };
 
   const [days, hours, minutes, seconds] = useCountdown(ofertaDetail.end_date);
-  console.log(user)
+
   return (
     <div style={{ paddingTop: "7rem" }}>
       {loading ? (
@@ -120,11 +128,12 @@ function OfertaDetailScreen() {
                 )}
 
                 <ListGroup variant="flush">
-                  {ofertaDetail.reviews?.map((review) => (
+                  {reviews.Reviews.map((review) => (
                     <ListGroup.Item key={review._id}>
                       <strong>{review.name}</strong>
                       <p>{review.createdAt.substring(0, 10)}</p>
                       <p>{review.comment}</p>
+                      <Rating value={review.rating}  color={'#f8e825'} />
                     </ListGroup.Item>
                   ))}
 
