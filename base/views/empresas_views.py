@@ -1,4 +1,4 @@
-from base.serializers.empresa_serializers import OfertaSerializer, SocialMediaUrlSerializer, EmpresaSerializer
+from base.serializers.empresa_serializers import OfertaSerializer,ReviewsSerializer, SocialMediaUrlSerializer, EmpresaSerializer
 from base.models import Oferta, Review, Empresa, SocialMediaUrl
 from rest_framework.views import APIView
 from rest_framework import generics
@@ -66,7 +66,25 @@ class GetEmpresa(generics.ListAPIView):
             return Response({'success':True,'Empresa' : serializer.data, 'SocialMediaUrls':urls_serializer.data}, status=status.HTTP_200_OK)
         except:
             return Response({'success':False,'detail': 'no existe empresa'}, status=status.HTTP_400_BAD_REQUEST)
+class GetOfertaReviews(generics.ListAPIView):
+    serializer_class=ReviewsSerializer
+    def get (self,request,pk):
+        oferta= Oferta.objects.get(_id=pk)
+        Reviews = Review.objects.filter(oferta=oferta._id)
+        serializer = self.serializer_class(Reviews, many=True)
+        return Response({'success':True,'Reviews' : serializer.data}, status=status.HTTP_200_OK)
+        
 
+class GetOfertasEmpresa(generics.ListAPIView):
+    serializer_class= OfertaSerializer
+    def get (self,request,pk):
+        empresa= Empresa.objects.get(id=pk)
+        print(empresa)
+        ofertas = Oferta.objects.filter(empresa=empresa)
+        print(ofertas)
+        serializer = self.serializer_class(ofertas, many=True)
+        return Response({'success':True,'ofertas' : serializer.data}, status=status.HTTP_200_OK)
+      
 class GetEmpresas(generics.ListAPIView):
     serializer_class=EmpresaSerializer
     def get (self,request):

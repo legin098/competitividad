@@ -5,7 +5,8 @@ urlpatterns = [
     path('', views.GetEmpresas.as_view(), name='empresas_list'),
     
     path('ofertas/', views.OfertaView.as_view(),name= 'ofertas_list'),
-
+    path('reviews/oferta/<str:pk>', views.GetOfertaReviews.as_view(), name='review-list'),
+    path('ofertas/emporesa/<str:pk>', views.GetOfertasEmpresa.as_view(), name='ofertas-empresa'),
     path('ofertas/create/', views.createOferta, name="oferta-create"),
     path('ofertas/upload/', views.uploadImage, name="image-upload"),
 
