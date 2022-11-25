@@ -23,7 +23,7 @@ import { reviewsOfertaAction } from "actions/reviewAction";
 
 function OfertaDetailScreen() {
   const [comment, setComment] = useState("");
-  const [rating, setRating] = useState(0)
+  const [rating, setRating] = useState(0);
   const params = useParams();
 
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ function OfertaDetailScreen() {
     (state) => state.ofertas
   );
   const ofertaReviewCreate = useSelector((state) => state.review);
-  const { reviews } = useSelector(state => state.ofertaReviews)
+  const { reviews } = useSelector((state) => state.ofertaReviews);
 
   const {
     loading: loadingOfertaReview,
@@ -41,13 +41,13 @@ function OfertaDetailScreen() {
   } = ofertaReviewCreate;
 
   useEffect(() => {
-    console.log("effect", ofertaDetail)
-    dispatch(reviewsOfertaAction(ofertaDetail._id))
-  }, [ofertaDetail])
+    console.log("effect", ofertaDetail);
+    dispatch(reviewsOfertaAction(ofertaDetail._id));
+  }, [ofertaDetail]);
 
   useEffect(() => {
     if (successOfertaReview) {
-      setRating(0)
+      setRating(0);
       setComment("");
       dispatch({ type: OFERTA_CREATE_REVIEW_RESET });
     }
@@ -133,7 +133,7 @@ function OfertaDetailScreen() {
                       <strong>{review.name}</strong>
                       <p>{review.createdAt.substring(0, 10)}</p>
                       <p>{review.comment}</p>
-                      <Rating value={review.rating}  color={'#f8e825'} />
+                      <Rating value={review.rating} color={"#f8e825"} />
                     </ListGroup.Item>
                   ))}
 
@@ -149,23 +149,22 @@ function OfertaDetailScreen() {
                     )}
 
                     {user.id ? (
-
                       <Form onSubmit={submitHandler}>
-                        <Form.Group controlId='rating'>
-                                                        <Form.Label>Rating</Form.Label>
-                                                        <Form.Control
-                                                            as='select'
-                                                            value={rating}
-                                                            onChange={(e) => setRating(e.target.value)}
-                                                        >
-                                                            <option value=''>Select...</option>
-                                                            <option value='1'>1 - Malo</option>
-                                                            <option value='2'>2 - Regular</option>
-                                                            <option value='3'>3 - Bueno</option>
-                                                            <option value='4'>4 - Muy bueno</option>
-                                                            <option value='5'>5 - Excelente</option>
-                                                        </Form.Control>
-                                                    </Form.Group>
+                        <Form.Group controlId="rating">
+                          <Form.Label>Rating</Form.Label>
+                          <Form.Control
+                            as="select"
+                            value={rating}
+                            onChange={(e) => setRating(e.target.value)}
+                          >
+                            <option value="">Select...</option>
+                            <option value="1">1 - Malo</option>
+                            <option value="2">2 - Regular</option>
+                            <option value="3">3 - Bueno</option>
+                            <option value="4">4 - Muy bueno</option>
+                            <option value="5">5 - Excelente</option>
+                          </Form.Control>
+                        </Form.Group>
                         <Form.Group controlId="comment">
                           <Form.Label>Review</Form.Label>
                           <Form.Control
