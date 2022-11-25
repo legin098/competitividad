@@ -74,6 +74,14 @@ class GetOfertaReviews(generics.ListAPIView):
         serializer = self.serializer_class(Reviews, many=True)
         return Response({'success':True,'Reviews' : serializer.data}, status=status.HTTP_200_OK)
         
+class GetSocialMediaUrls(generics.ListAPIView):
+    serializer_class = SocialMediaUrlSerializer
+    def get (self,request,pk):
+        empresa= Empresa.objects.get(id=pk)
+        social_media_urls = SocialMediaUrl.objects.filter(empresa=empresa.id)
+        serializer = self.serializer_class(social_media_urls, many=True)
+        return Response({'success':True,'Reviews' : serializer.data}, status=status.HTTP_200_OK)
+
 
 class GetOfertasEmpresa(generics.ListAPIView):
     serializer_class= OfertaSerializer
