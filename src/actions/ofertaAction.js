@@ -3,12 +3,14 @@ import {
   OFERTA_REQUEST,
   OFERTA_SUCCESS,
   OFERTA_FAIL,
-  OFERTA_DETAIL_REQUEST,
-  OFERTA_DETAIL_FAIL,
-  OFERTA_DETAIL_SUCCESS,
+  OBTENER_OFERTA_DETAIL,
   OFERTA_TOP_FAIL,
   OFERTA_TOP_SUCCESS,
   OFERTA_TOP_REQUEST,
+  OFERTA_CREATE_REVIEW_FAIL,
+  OFERTA_CREATE_REVIEW_REQUEST,
+  OFERTA_CREATE_REVIEW_RESET,
+  OFERTA_CREATE_REVIEW_SUCCESS,
 
 } from "../types/ofertaTypes";
 
@@ -48,34 +50,44 @@ export const listTopOfertas = () => async (dispatch) => {
     }
 }
 
+export const createOfertaReview = (ofertaId, review) => async (dispatch, getState) => {
+  try {
+      dispatch({
+          type: OFERTA_CREATE_REVIEW_REQUEST
+      })
 
-export const ofertaDetailAction = (id) => async (dispatch) =>{
-    try{
-        dispatch(ofertaDetailRequest(true))
-        const {data: dataOfertasDetail} = await clienteAxios.get(`empresas/ofertas/${id}`)
+      const {
+          userLogin: { userInfo },
+      } = getState()
 
-        console.log("dataOfertaDetail:", dataOfertasDetail)
-        dispatch(ofertaDetailSuccess(dataOfertasDetail))
-    }catch (error) {
-        console.log(error);
-        dispatch(ofertaDetailFail(error))
+      const config = {
+          headers: {
+              'Content-type': 'application/json',
+              Authorization: `Bearer ${userInfo.token}`
+          }
       }
-}
 
-const ofertaDetailRequest = (estado) => ({
-    type: OFERTA_DETAIL_REQUEST,
-    payload: estado,
-  });
-  
-  const ofertaDetailSuccess = (dataOfertas) => ({
-    type: OFERTA_DETAIL_SUCCESS,
-    payload: dataOfertas,
-  });
-  
-  const ofertaDetailFail = (error) =>({
-      type: OFERTA_DETAIL_FAIL,
-      payload: error
-  })
+      const { data } = await clienteAxios.post(
+          `/empresas/ofertas/${ofertaId}/reviews/`,
+          review,
+          config
+      )
+      dispatch({
+          type: OFERTA_CREATE_REVIEW_SUCCESS,
+          payload: data,
+      })
+
+
+
+  } catch (error) {
+      dispatch({
+          type: OFERTA_CREATE_REVIEW_FAIL,
+          payload: error.response && error.response.data.detail
+              ? error.response.data.detail
+              : error.message,
+      })
+  }
+}
 
 const ofertaRequest = (estado) => ({
   type: OFERTA_REQUEST,
@@ -91,3 +103,12 @@ const ofertaFail = (error) =>({
     type: OFERTA_FAIL,
     payload: error
 })
+
+export const obtenerDetalleOfertaAction = (oferta) => (dispatch) => {
+  dispatch(obtenerDetalleOferta(oferta));
+};
+
+const obtenerDetalleOferta = (oferta) => ({
+  type: OBTENER_OFERTA_DETAIL,
+  payload: oferta,
+});
