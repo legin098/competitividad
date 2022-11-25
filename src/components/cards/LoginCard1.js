@@ -1,6 +1,7 @@
 import { userLoginAction } from "actions/userAction";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 // reactstrap components
 import {
@@ -24,12 +25,13 @@ function LoginCard1() {
   const [email, setEmail] = useState("")
   const [pwd, setPwd] = useState("")
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
     dispatch(userLoginAction(email, pwd))
-
+    navigate("/index")
     
   }
   return (

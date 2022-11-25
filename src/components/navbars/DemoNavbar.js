@@ -20,9 +20,11 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogoutAction } from "actions/userAction";
 
 function DemoNavbar(props) {
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
   const [collapseOpen, toggleCollapse] = useState(false);
@@ -129,27 +131,33 @@ function DemoNavbar(props) {
                 </Link>
               </UncontrolledDropdown>
 
-              <UncontrolledDropdown nav>
-                <Link to="/login">
-                  <span
-                    className="nav-link-inner--text"
-                    style={{ color: "#0A81C4" }}
+              {user.id ? (
+                <UncontrolledDropdown nav>
+                  <Link
+                    to="/index"
+                    onClick={() => dispatch(userLogoutAction())}
                   >
-                    Login
-                  </span>
-                </Link>
-              </UncontrolledDropdown>
-              <UncontrolledDropdown nav>
-                <Link to="/login">
-                  <span
-                    className="nav-link-inner--text"
-                    style={{ color: "#0A81C4" }}
-                  >
-                    Login
-                  </span>
-                </Link>
-              </UncontrolledDropdown>
-              
+                    <span
+                      className="nav-link-inner--text"
+                      style={{ color: "#0A81C4" }}
+                    >
+                      Logout
+                    </span>
+                  </Link>
+                </UncontrolledDropdown>
+              ) : (
+                <UncontrolledDropdown nav>
+                  <Link to="/login">
+                    <span
+                      className="nav-link-inner--text"
+                      style={{ color: "#0A81C4" }}
+                    >
+                      Login
+                    </span>
+                  </Link>
+                </UncontrolledDropdown>
+              )}
+
               <UncontrolledDropdown nav onClick={handleShow}>
                 <DropdownToggle
                   tag={NavLink}
