@@ -105,12 +105,12 @@ function DemoNavbar(props) {
                                 </Col>
                             </Row>
                         </div>
-                        <Nav style={{gap:"4rem"}}
+                        <Nav 
                             className="navbar-nav-hover align-items-lg-center ml-lg-auto"
                             navbar
                         >
                             <UncontrolledDropdown nav>
-                                <Link to="/empresa/id">
+                                <Link to="/empresas/">
 
                                     <span className="nav-link-inner--text" style={{color:"#0A81C4"}}>
                                         Empresa
@@ -118,19 +118,10 @@ function DemoNavbar(props) {
                                 </Link>
                             </UncontrolledDropdown>
                             <UncontrolledDropdown nav>
-                                <Link to="/nosotros">
+                                <Link to="/ofertas/">
 
                                     <span className="nav-link-inner--text" style={{color:"#0A81C4"}}>
-                                        Nosotros
-                                    </span>
-                                </Link>
-                            </UncontrolledDropdown>
-                            <UncontrolledDropdown nav>
-                                <Link to="/hacemos"
-                                >
-
-                                    <span className="nav-link-inner--text" style={{color:"#0A81C4"}}>
-                                        Que hacemos
+                                        Ofertas
                                     </span>
                                 </Link>
                             </UncontrolledDropdown>
