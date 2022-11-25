@@ -31,7 +31,7 @@ const EmpresaDetailScreen = () => {
 
   const getOferta = async () => {
     try {
-      const { data : dataOfertas } = await clienteAxios.get(`empresas/ofertas/empresa/${empresaDetail.id}/`)
+      const { data : dataOfertas } = await clienteAxios.get(`empresas/ofertas/empresa/${empresaDetail.id}`)
       console.log("dataOfertas", dataOfertas)
       setOfertas(dataOfertas)
     } catch (error) {
@@ -72,16 +72,7 @@ const EmpresaDetailScreen = () => {
                 <Container>
                   <h4 style={{ color: "#0A81C4" }}>{empresaDetail.nombre}</h4>
                   <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only five centuries,
-                    but also the leap into electronic typesetting, remaining
-                    essentially unchanged. It was popularised in the 1960s with
-                    the release of Letraset sheets containing Lorem Ipsum
-                    passages, and more recently with desktop publishing software
-                    like Aldus PageMaker including versions of Lorem Ipsum.
+                    {empresaDetail.descripcion}
                   </p>
                   <Row>
                     {social.map((red) => (
@@ -104,7 +95,6 @@ const EmpresaDetailScreen = () => {
               </Col>
             ))}
           </Row>
-          {/* <Paginate page={page} pages={pages}/> */}
         </Container>
             </Row>
           </Container>
