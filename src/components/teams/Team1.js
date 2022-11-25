@@ -1,4 +1,5 @@
 import React from "react";
+import Axios from "axios";
 
 // reactstrap components
 import {
@@ -11,6 +12,10 @@ import {
   Carousel,
   CarouselItem,
 } from "reactstrap";
+import ExpiredNotice from "components/ExpiredNotice";
+import ShowCounter from "components/ShowCounter";
+import { useCountdown } from "hook/useContdown";
+import OfertaTop from "components/OfertaTop";
 
 // Core Components
 
@@ -283,33 +288,42 @@ const items = [
 function Team1() {
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [animating, setAnimating] = React.useState(false);
+  const [topOfertas, setTopOfertas] = React.useState([]);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await Axios({
+          url: "http://localhost:8000/api/empresas/ofertas/top/",
+        });
+
+        setTopOfertas(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const next = () => {
     if (animating) return;
-    const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
+    const nextIndex =
+      activeIndex === topOfertas?.length - 1 ? 0 : activeIndex + 1;
     setActiveIndex(nextIndex);
   };
 
   const previous = () => {
     if (animating) return;
-    const nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
+    const nextIndex =
+      activeIndex === 0 ? topOfertas?.length - 1 : activeIndex - 1;
     setActiveIndex(nextIndex);
   };
+  
+
   return (
     <>
       <section className="team-1">
         <Container>
-          <Row>
-            <Col className="ml-auto mr-auto text-center" md="8">
-              <h3 className="display-3">Our Awesome Team 1</h3>
-              <p className="lead">
-                People in this world shun people for being great. For being a
-                bright color. For standing out. But the time is now to be okay
-                to be the greatest you. Would you believe in what you believe
-                in?
-              </p>
-            </Col>
-          </Row>
           <Row>
             <Carousel
               activeIndex={activeIndex}
@@ -318,14 +332,14 @@ function Team1() {
               className="carousel-team"
               id="carouselExampleControls"
             >
-              {items.map((item, key) => {
+              {topOfertas?.map((oferta) => {
                 return (
                   <CarouselItem
                     onExiting={() => setAnimating(true)}
                     onExited={() => setAnimating(false)}
-                    key={key}
                   >
-                    {item.content}
+                    <OfertaTop oferta={oferta}></OfertaTop>
+                    
                   </CarouselItem>
                 );
               })}

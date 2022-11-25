@@ -34,7 +34,7 @@ class Oferta(models.Model):
         max_digits=7, decimal_places=2, null=True, blank=True)
     numReviews = models.IntegerField(null=True, blank=True, default=0)
     precio = models.DecimalField(
-        max_digits=7, decimal_places=2, null=True, blank=True)
+        max_digits=9, decimal_places=2, null=True, blank=True)
     descuento = models.IntegerField(max_length=2)
     createdAt = models.DateTimeField(auto_now_add=True)
     end_date = models.DateField()
