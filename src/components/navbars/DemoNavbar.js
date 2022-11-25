@@ -179,7 +179,7 @@ function DemoNavbar(props) {
           <Modal.Title>Formato de peticiones quejas y reclamos</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form action="https://formspree.io/f/mqkjnrbj" method="post">
+          <Form action="https://formspree.io/f/mpzbklgw" method="post">
             <Row>
               <Col md="6">
                 <Form.Group className="mb-3" controlId="formBasicText">

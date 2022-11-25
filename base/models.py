@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 class Empresa(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=200)
+    descripcion = models.CharField(max_length=600,default="lorem ipsum")
     lat = models.CharField(max_length=255)
     lon = models.CharField(max_length=255)
     razon_social = models.CharField(max_length=255)
