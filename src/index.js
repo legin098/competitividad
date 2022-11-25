@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Route, Redirect, HashRouter, Routes } from "react-router-dom";
+import { Route, HashRouter, Routes } from "react-router-dom";
 import "./styles.css"
 import "assets/css/nucleo-svg.css";
 import "assets/css/nucleo-icons.css";
