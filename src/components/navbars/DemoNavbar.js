@@ -7,7 +7,7 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 // JavaScript plugin that hides or shows a component based on your scroll
 import Headroom from "headroom.js";
-import Logo from "../../static/img/logo-horizontal.png"
+import Logo from "../../static/img/logo-horizontal.png";
 // reactstrap components
 import {
   Collapse,
@@ -67,11 +67,7 @@ function DemoNavbar(props) {
       >
         <Container>
           <NavbarBrand className="mr-lg-5" to="/index" tag={Link}>
-            <img
-              alt="..."
-              style={{ height: "60px" }}
-              src={Logo}
-            ></img>
+            <img alt="..." style={{ height: "60px" }} src={Logo}></img>
           </NavbarBrand>
           <button
             className="navbar-toggler"
@@ -133,19 +129,35 @@ function DemoNavbar(props) {
               </UncontrolledDropdown>
 
               {user.id ? (
-                <UncontrolledDropdown nav>
-                  <Link
-                    to="/index"
-                    onClick={() => dispatch(userLogoutAction())}
-                  >
-                    <span
-                      className="nav-link-inner--text"
-                      style={{ color: "#0A81C4" }}
+                <>
+                  {user.isAdmin && (
+                    <UncontrolledDropdown nav>
+                      <a
+                        href="http://127.0.0.1:8000/admin"
+                      >
+                        <span
+                          className="nav-link-inner--text"
+                          style={{ color: "#0A81C4" }}
+                        >
+                          Admin
+                        </span>
+                      </a>
+                    </UncontrolledDropdown>
+                  )}
+                  <UncontrolledDropdown nav>
+                    <Link
+                      to="/index"
+                      onClick={() => dispatch(userLogoutAction())}
                     >
-                      Logout
-                    </span>
-                  </Link>
-                </UncontrolledDropdown>
+                      <span
+                        className="nav-link-inner--text"
+                        style={{ color: "#0A81C4" }}
+                      >
+                        Logout
+                      </span>
+                    </Link>
+                  </UncontrolledDropdown>
+                </>
               ) : (
                 <UncontrolledDropdown nav>
                   <Link to="/login">
