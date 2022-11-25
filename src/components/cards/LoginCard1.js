@@ -35,44 +35,9 @@ function LoginCard1() {
   return (
     <>
       <Card className="bg-secondary shadow border-0">
-        <CardHeader className="bg-white pb-5">
-          <div className="text-muted text-center mb-3">
-            <small>Login with</small>
-          </div>
-          <div className="btn-wrapper text-center">
-            <Button
-              className="btn-neutral btn-icon"
-              color="default"
-              href="#pablo"
-              onClick={(e) => e.preventDefault()}
-            >
-              <span className="btn-inner--icon">
-                <img
-                  alt="..."
-                  src={require("assets/img/icons/common/github.svg").default}
-                ></img>
-              </span>
-              <span className="btn-inner--text">Github</span>
-            </Button>
-            <Button
-              className="btn-neutral btn-icon"
-              color="default"
-              href="#pablo"
-              onClick={(e) => e.preventDefault()}
-            >
-              <span className="btn-inner--icon">
-                <img
-                  alt="..."
-                  src={require("assets/img/icons/common/google.svg").default}
-                ></img>
-              </span>
-              <span className="btn-inner--text">Google</span>
-            </Button>
-          </div>
-        </CardHeader>
         <CardBody className="px-lg-5 py-lg-5">
           <div className="text-center text-muted mb-4">
-            <small>Or login with credentials</small>
+            <small>Inicie sesión con credenciales</small>
           </div>
           <Form role="form" onSubmit={ handleSubmit }>
             <FormGroup className={"mb-3 " + emailFocus}>
@@ -83,7 +48,7 @@ function LoginCard1() {
                   </InputGroupText>
                 </InputGroupAddon>
                 <Input
-                  placeholder="Email"
+                  placeholder="Correo eletronico"
                   type="email"
                   onChange = { e => setEmail(e.target.value)}
                 ></Input>
@@ -97,7 +62,7 @@ function LoginCard1() {
                   </InputGroupText>
                 </InputGroupAddon>
                 <Input
-                  placeholder="Password"
+                  placeholder="Contraseña"
                   type="password"
                   onChange = { e => setPwd(e.target.value)}
                 ></Input>
@@ -113,12 +78,12 @@ function LoginCard1() {
                 className="custom-control-label"
                 htmlFor=" customCheckLogin2"
               >
-                <span className="text-default opacity-5">Remember me</span>
+                <span className="text-default opacity-5">Acuérdate de mí</span>
               </label>
             </div>
             <div className="text-center">
-              <Button className="my-4" color="primary" type="submit">
-                Login
+              <Button className="my-4 text-capitalize" color="primary" type="submit">
+                Iniciar sesión
               </Button>
             </div>
           </Form>

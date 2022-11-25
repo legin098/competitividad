@@ -1,10 +1,9 @@
 import React from "react";
 
 // reactstrap components
-import { Container, Row, Col } from "reactstrap";
+import { Container, Col } from "reactstrap";
 
 // Core Components
-import DemoNavbar from "components/navbars/DemoNavbar.js";
 import DemoFooter from "components/footers/Footer2";
 import LoginCard1 from "components/cards/LoginCard1.js";
 

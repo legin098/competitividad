@@ -4,8 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 const EmpresaDetailScreen = () => {
-
-    const { empresaDetail } = useSelector(state => state.empresas)
+  const { empresaDetail } = useSelector((state) => state.empresas);
 
   return (
     <>
@@ -13,9 +12,7 @@ const EmpresaDetailScreen = () => {
         <Container className="pt-5" fluid>
           <Row className="justify-content-center">
             <Col className="text-center" lg="8">
-              <h1 style={{ color: "#0A81C4" }}>
-                {empresaDetail.nombre}
-              </h1>
+              <h1 style={{ color: "#0A81C4" }}>{empresaDetail.nombre}</h1>
             </Col>
           </Row>
           <Row>

@@ -22,7 +22,7 @@ function SearchBox() {
                 type='text'
                 name='q'
                 onChange={(e) => setKeyword(e.target.value.toString())}
-                className='mr-sm-2 ml-sm-5'
+                className='mr-sm-2'
             ></Form.Control>
 
             <Button
@@ -30,7 +30,7 @@ function SearchBox() {
                 variant='outline-success'
                 className='p-2'
             >
-                Search
+                Buscar
             </Button>
         </Form>
     )
