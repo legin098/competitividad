@@ -17,7 +17,7 @@ class OfertaView(APIView):
     parser_classes = (MultiPartParser, FormParser)
 
     def get(self, request, *args, **kwargs):
-        query = request.query_params.filter('keyword')
+        query = request.query_params.get('keyword')
         if query == None:
             query = ''
         
