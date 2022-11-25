@@ -13,7 +13,8 @@ const initialState = {
   ofertas: [],
   loading: false,
   error: null,
-  ofertaDetail : {}
+  ofertaDetail : {},
+  review:{}
 };
 
 export const ofertasReducer = (state=initialState, action) => {

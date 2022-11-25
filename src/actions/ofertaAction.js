@@ -11,83 +11,86 @@ import {
   OFERTA_CREATE_REVIEW_REQUEST,
   OFERTA_CREATE_REVIEW_RESET,
   OFERTA_CREATE_REVIEW_SUCCESS,
-
 } from "../types/ofertaTypes";
 
-export const ofertaAction = (keyword = '') => async (dispatch) => {
+export const ofertaAction =
+  (keyword = "") =>
+  async (dispatch) => {
+    try {
+      dispatch(ofertaRequest(true));
+
+      const { data: dataOfertas } = await clienteAxios.get(
+        `empresas/ofertas/${keyword}`
+      );
+
+      console.log("dataOfertas", dataOfertas);
+
+      dispatch(ofertaSuccess(dataOfertas));
+    } catch (error) {
+      console.log(error);
+      dispatch(ofertaFail(error));
+    }
+  };
+
+export const listTopOfertas = () => async (dispatch) => {
   try {
-    dispatch(ofertaRequest(true));
+    dispatch({ type: OFERTA_TOP_REQUEST });
 
-    const { data: dataOfertas } = await clienteAxios.get(`empresas/ofertas/${keyword}`);
+    const { data } = await clienteAxios.get(`/empresas/ofertas/top/`);
 
-    console.log("dataOfertas", dataOfertas);
-
-    dispatch(ofertaSuccess(dataOfertas));
+    dispatch({
+      type: OFERTA_TOP_SUCCESS,
+      payload: data,
+    });
   } catch (error) {
-    console.log(error);
-    dispatch(ofertaFail(error))
+    dispatch({
+      type: OFERTA_TOP_FAIL,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
   }
 };
 
-export const listTopOfertas = () => async (dispatch) => {
+export const createOfertaReview =
+  (ofertaId, review) => async (dispatch, getState) => {
+    console.log("review en accion", review);
     try {
-        dispatch({ type: OFERTA_TOP_REQUEST })
-
-        const { data } = await clienteAxios.get(`/empresas/ofertas/top/`)
-
-        dispatch({
-            type: OFERTA_TOP_SUCCESS,
-            payload: data
-        })
-
-    } catch (error) {
-        dispatch({
-            type: OFERTA_TOP_FAIL,
-            payload: error.response && error.response.data.detail
-                ? error.response.data.detail
-                : error.message,
-        })
-    }
-}
-
-export const createOfertaReview = (ofertaId, review) => async (dispatch, getState) => {
-  try {
       dispatch({
-          type: OFERTA_CREATE_REVIEW_REQUEST
-      })
+        type: OFERTA_CREATE_REVIEW_REQUEST,
+      });
 
       const {
-          userLogin: { userInfo },
-      } = getState()
+        user: { user },
+      } = getState();
 
       const config = {
-          headers: {
-              'Content-type': 'application/json',
-              Authorization: `Bearer ${userInfo.token}`
-          }
-      }
+        headers: {
+          Authorization: `Bearer ${user.access}`,
+        },
+      };
 
       const { data } = await clienteAxios.post(
-          `/empresas/ofertas/${ofertaId}/reviews/`,
-          review,
-          config
-      )
+        `/empresas/ofertas/${ofertaId}/reviews/`,
+        review,
+        config
+      );
       dispatch({
-          type: OFERTA_CREATE_REVIEW_SUCCESS,
-          payload: data,
-      })
-
-
-
-  } catch (error) {
+        type: OFERTA_CREATE_REVIEW_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      console.log(error);
       dispatch({
-          type: OFERTA_CREATE_REVIEW_FAIL,
-          payload: error.response && error.response.data.detail
-              ? error.response.data.detail
-              : error.message,
-      })
-  }
-}
+        type: OFERTA_CREATE_REVIEW_FAIL,
+        payload:
+          error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message,
+      });
+    }
+  };
 
 const ofertaRequest = (estado) => ({
   type: OFERTA_REQUEST,
@@ -99,10 +102,10 @@ const ofertaSuccess = (dataOfertas) => ({
   payload: dataOfertas,
 });
 
-const ofertaFail = (error) =>({
-    type: OFERTA_FAIL,
-    payload: error
-})
+const ofertaFail = (error) => ({
+  type: OFERTA_FAIL,
+  payload: error,
+});
 
 export const obtenerDetalleOfertaAction = (oferta) => (dispatch) => {
   dispatch(obtenerDetalleOferta(oferta));

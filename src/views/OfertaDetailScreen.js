@@ -22,11 +22,11 @@ import {
 
 function OfertaDetailScreen() {
   const [comment, setComment] = useState("");
+  const [rating, setRating] = useState(0)
   const params = useParams();
 
   const dispatch = useDispatch();
-  const userLogin = useSelector((state) => state.user);
-  const { userInfo } = userLogin;
+  const { user } = useSelector((state) => state.user);
   const { loading, error, ofertaDetail } = useSelector(
     (state) => state.ofertas
   );
@@ -39,6 +39,7 @@ function OfertaDetailScreen() {
   } = ofertaReviewCreate;
   useEffect(() => {
     if (successOfertaReview) {
+      setRating(0)
       setComment("");
       dispatch({ type: OFERTA_CREATE_REVIEW_RESET });
     }
@@ -48,13 +49,14 @@ function OfertaDetailScreen() {
     e.preventDefault();
     dispatch(
       createOfertaReview(params.id, {
+        rating,
         comment,
       })
     );
   };
 
   const [days, hours, minutes, seconds] = useCountdown(ofertaDetail.end_date);
-
+  console.log(user)
   return (
     <div style={{ paddingTop: "7rem" }}>
       {loading ? (
@@ -75,7 +77,7 @@ function OfertaDetailScreen() {
               <Col md={4}>
                 <ListGroup variant="flush">
                   <ListGroup.Item>
-                    <h3>{ofertaDetail.name}</h3>
+                    <h3>{ofertaDetail.nombre}</h3>
                   </ListGroup.Item>
 
                   <ListGroup.Item>
@@ -137,8 +139,24 @@ function OfertaDetailScreen() {
                       <Message variant="danger">{errorOfertaReview}</Message>
                     )}
 
-                    {userInfo ? (
+                    {user.id ? (
+
                       <Form onSubmit={submitHandler}>
+                        <Form.Group controlId='rating'>
+                                                        <Form.Label>Rating</Form.Label>
+                                                        <Form.Control
+                                                            as='select'
+                                                            value={rating}
+                                                            onChange={(e) => setRating(e.target.value)}
+                                                        >
+                                                            <option value=''>Select...</option>
+                                                            <option value='1'>1 - Malo</option>
+                                                            <option value='2'>2 - Regular</option>
+                                                            <option value='3'>3 - Bueno</option>
+                                                            <option value='4'>4 - Muy bueno</option>
+                                                            <option value='5'>5 - Excelente</option>
+                                                        </Form.Control>
+                                                    </Form.Group>
                         <Form.Group controlId="comment">
                           <Form.Label>Review</Form.Label>
                           <Form.Control
