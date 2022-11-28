@@ -38,7 +38,7 @@ function Oferta({ oferta }) {
                     Antes: $ <del>{oferta.precio}</del>
                 </Card.Text>
                 <Card.Text as="h5">
-                    Ahora: $ {oferta.precio*oferta.descuento/100}
+                    Ahora: $ {oferta.precio - (oferta.precio * oferta.descuento/100)}
                 </Card.Text>
             </Card.Body>
         </Card>

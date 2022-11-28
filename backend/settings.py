@@ -91,9 +91,12 @@ JAZZMIN_SETTINGS = {
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
     "site_brand": "Competitividad",
+    "login_logo": "img/logo-vertical.png",
+    "site_logo_classes": "img-fluid",
+
 
     # Logo to use for your site, must be present in static files, used for brand on top left
-    "site_logo": "img/logo.png",
+    "site_logo": "img/logo-vertical.png",
 }
 
 MIDDLEWARE = [
